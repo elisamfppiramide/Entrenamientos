@@ -13,7 +13,7 @@ public class MySQLDBConnection {
     public static Connection getInstance() {
         if(connection == null) {
             try {
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/misjueguecitos", "root", "root");
+                connection = DriverManager.getConnection("jdbc:mysql://bbddexamenprueba2.cpw4koqek8qf.us-east-1.rds.amazonaws.com/entrenamientos", "admin", "Cachorritos11");
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
