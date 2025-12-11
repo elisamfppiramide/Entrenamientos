@@ -18,11 +18,11 @@ public class JugadorUsesCases {
     }
 
     public void save(Jugador jugador){
-        if(jugador.getResistencia() > 3 && jugador.getResistencia() <= 0){
+        if(jugador.getResistencia() > 3 || jugador.getResistencia() <= 0){
             throw new IllegalArgumentException("Los valores deben ser 1, 2 o 3");
-        } else if (jugador.getRecuperacion() > 3 && jugador.getRecuperacion() <=0) {
+        } else if (jugador.getRecuperacion() > 3 || jugador.getRecuperacion() <=0) {
             throw new IllegalArgumentException("Los valores deben ser 1, 2 o 3");
-        } else if (jugador.getVelocidad() > 3 && jugador.getVelocidad() <=0) {
+        } else if (jugador.getVelocidad() > 3 || jugador.getVelocidad() <=0) {
             throw new IllegalArgumentException("Los valores deben ser 1, 2 o 3");
         }else{
             this.jugadorRepository.save(jugador);

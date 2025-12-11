@@ -22,6 +22,17 @@ public class Jugador {
         this.velocidad = velocidad;
         this.recuperacion = recuperacion;
     }
+    public Jugador(String dni, String nombre, String apellidos, String fechaNacimiento, int resistencia, int velocidad, int recuperacion){
+        this.dni = dni;
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.fechaNacimiento = fechaNacimiento;
+        this.resistencia = resistencia;
+        this.velocidad = velocidad;
+        this.recuperacion = recuperacion;
+    }
+
+    public Jugador(){}
 
     public Jugador(String dni, String nombre, String apellidos){
         this.dni = dni;
@@ -63,5 +74,37 @@ public class Jugador {
 
     public int getRecuperacion() {
         return recuperacion;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public void setResistencia(int resistencia) {
+        this.resistencia = resistencia;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
+    }
+
+    public void setRecuperacion(int recuperacion) {
+        this.recuperacion = recuperacion;
     }
 }

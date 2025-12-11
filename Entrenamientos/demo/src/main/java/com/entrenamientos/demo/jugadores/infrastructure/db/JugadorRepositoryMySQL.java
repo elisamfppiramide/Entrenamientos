@@ -1,4 +1,4 @@
-package com.entrenamientos.demo.jugadores.infrastructure;
+package com.entrenamientos.demo.jugadores.infrastructure.db;
 
 import com.entrenamientos.demo.context.MySQLDBConnection;
 import com.entrenamientos.demo.jugadores.domain.Jugador;
@@ -13,7 +13,7 @@ import java.util.List;
 public class JugadorRepositoryMySQL implements JugadorRepository {
     @Override
     public void reset() {
-        String query = "delete * from jugador";
+        String query = "delete from jugador";
         try{
             PreparedStatement ps = MySQLDBConnection.getInstance().prepareStatement(query);
             ps.execute();
@@ -65,7 +65,20 @@ public class JugadorRepositoryMySQL implements JugadorRepository {
         try{
             PreparedStatement ps = MySQLDBConnection.getInstance().prepareStatement(query);
             ps.setInt(1, id);
-            ps.execute();
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                jugador = new Jugador(
+                        rs.getInt("id"),
+                        rs.getString("dni"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("fechaNacimiento"),
+                        rs.getInt("resistencia"),
+                        rs.getInt("velocidad"),
+                        rs.getInt("recuperacion")
+                );
+            }
+
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -79,11 +92,12 @@ public class JugadorRepositoryMySQL implements JugadorRepository {
             PreparedStatement ps = MySQLDBConnection.getInstance().prepareStatement(query);
             ps.setString(1, jugadorNuevo.getDni());
             ps.setString(2, jugadorNuevo.getNombre());
-            ps.setString(3, jugadorNuevo.getFechaNacimiento());
-            ps.setInt(4, jugadorNuevo.getResistencia());
-            ps.setInt(5, jugadorNuevo.getVelocidad());
-            ps.setInt(6, jugadorNuevo.getRecuperacion());
-            ps.setInt(7, id);
+            ps.setString(3, jugadorNuevo.getApellidos());
+            ps.setString(4, jugadorNuevo.getFechaNacimiento());
+            ps.setInt(5, jugadorNuevo.getResistencia());
+            ps.setInt(6, jugadorNuevo.getVelocidad());
+            ps.setInt(7, jugadorNuevo.getRecuperacion());
+            ps.setInt(8, id);
             ps.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException();
