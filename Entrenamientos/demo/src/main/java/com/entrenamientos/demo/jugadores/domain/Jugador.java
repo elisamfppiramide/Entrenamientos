@@ -32,6 +32,11 @@ public class Jugador {
         this.recuperacion = recuperacion;
     }
 
+    public Jugador(int id, String fechaNacimiento){
+        this.id = id;
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
     public Jugador(){}
 
     public Jugador(String dni, String nombre, String apellidos){
