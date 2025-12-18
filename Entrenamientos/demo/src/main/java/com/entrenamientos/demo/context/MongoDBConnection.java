@@ -10,8 +10,8 @@ public class MongoDBConnection {
     private final MongoDatabase database;
 
     private MongoDBConnection(){
-        this.mongoClient = MongoClients.create("mongodb://admin:admin123@localhost:27017");
-        this.database = mongoClient.getDatabase("animalitos-app");
+        this.mongoClient = MongoClients.create("mongodb+srv://dwes:nomevoyaolvidar123@prueba1.xupogib.mongodb.net/?appName=prueba1");
+        this.database = mongoClient.getDatabase("deporte");
     }
 
     public static MongoDatabase getDatabase() {

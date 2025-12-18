@@ -7,6 +7,7 @@ import com.entrenamientos.demo.entrenamientos.domain.Entrenamiento;
 import com.entrenamientos.demo.entrenamientos.domain.EntrenamientoRepository;
 import com.entrenamientos.demo.jugadores.domain.Jugador;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.result.InsertOneResult;
 import org.bson.BsonObjectId;
 import org.bson.Document;
 import org.bson.types.ObjectId;
@@ -90,10 +91,9 @@ public class EntrenamientoRepositoryMongoDB implements EntrenamientoRepository {
         if (asistentesDoc != null) {
             List<Jugador> asistentes = new ArrayList<>();
 
-            //Como lo hago aquí??? Jugador es INT id y aqui es STRING
             for (Document jugadorDoc : asistentesDoc) {
                 Jugador jugador = new Jugador(
-                        jugadorDoc.getObjectId("_id"),
+                        jugadorDoc.getInteger("id"),
                         jugadorDoc.getString("nombre")
                 );
                 asistentes.add(jugador);
@@ -110,22 +110,43 @@ public class EntrenamientoRepositoryMongoDB implements EntrenamientoRepository {
     public Entrenamiento addEntrenamiento(String fecha, List<Ejercicio> listaEjercicios) {
         MongoCollection<Document> collection = MongoDBConnection.getDatabase().getCollection("entrenamientos");
         List<Document> ejercicios = new ArrayList<>();
+        int numEjercicios = 0;
+        int resistencia = 0, velocidad = 0, recuperacion = 0;
         for(Ejercicio e : listaEjercicios){
+            resistencia += e.getDureza().getResistencia();
+            velocidad += e.getDureza().getVelocidad();
+            recuperacion += e.getDureza().getRecuperacion();
             Document dureza = new Document().append("resistencia", e.getDureza().getResistencia()).append("velocidad", e.getDureza().getVelocidad()).append("recuperacion", e.getDureza().getRecuperacion());
             Document ejercicio = new Document().append("titulo", e.getTitulo()).append("descripcion", e.getDescripcion()).append("etiquetas", e.getEtiquetas()).append("duracion", e.getDuracion()).append("dureza", dureza).append("materiales", e.getMateriales()).append("recursos", e.getMultimedia());
             ejercicios.add(ejercicio);
         }
-        Document entrenamiento = new Document().append("fecha", fecha).append("ejercicios", ejercicios).append("asistentes", new ArrayList<>());
-        collection.insertOne(entrenamiento);
+        resistencia = resistencia / numEjercicios;
+        velocidad = velocidad / numEjercicios;
+        recuperacion = recuperacion / numEjercicios;
+        Document document = new Document().append("fecha", fecha).append("ejercicios", ejercicios).append("asistentes", new ArrayList<>());
+        InsertOneResult result = collection.insertOne(document);
+        String idMongo = result.getInsertedId().asString().toString();
+        Entrenamiento entrenamiento = new Entrenamiento(idMongo, fecha,null, listaEjercicios, new Dureza(resistencia, velocidad, recuperacion));
 
-
-        //EL IDDDDDDDDDD ns q hacer
-        return entrenamiento.getObjectId("_id");
+        return entrenamiento;
 
     }
 
     @Override
     public Entrenamiento addAsistentes(String id, List<Jugador> listaAsistentes) {
+        /*
+        MongoCollection<Document> collection = MongoDBConnection.getDatabase().getCollection("entrenamientos");
+        Document doc = collection.find(eq("_id", new ObjectId(id))).first();
+        Jugador jugador = new Jugador();
+        Document asistente = new Document();
+        asistente.append("dni", jugador.getDni()).append("apellidos", jugador.getApellidos()).append("fechaNacimiento", jugador.getFechaNacimiento()).append("velocidad", jugador.getVelocidad()).append("resistencia", jugador.getResistencia()).append("recuperacion", jugador.getRecuperacion());
+        Document filter = new Document("dni", jugador.getDni());
+        Document update = new Document("$push",
+                new Document("", ));
+
+*/
+        return null;
+
 
     }
 

@@ -13,4 +13,6 @@ public interface EjercicioRepository {
     //Recibe en el body todas sus propiedades para añadir un ejercicio.
     public Ejercicio addEjercicio(Ejercicio ejercicio);
 
+
+    public Ejercicio add(Ejercicio ejercicio, Material material);
 }

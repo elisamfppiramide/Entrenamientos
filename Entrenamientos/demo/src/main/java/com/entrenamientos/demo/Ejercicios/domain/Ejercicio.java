@@ -8,19 +8,21 @@ public class Ejercicio {
     private String titulo;
     private String descripcion;
     private List<String> etiquetas;
-    private int duracion;
+    private Integer duracion;
     private Dureza dureza;
-    private List<Materiales> materiales;
+    private List<Material> materialesString;
     private List<Multimedia> multimedia;
 
-    public Ejercicio(String idMongo, String titulo, String descripcion, List<String> etiquetas, int duracion, Dureza dureza, List<Materiales> materiales, List<Multimedia> multimedia) {
+    public Ejercicio(){}
+
+    public Ejercicio(String idMongo, String titulo, String descripcion, List<String> etiquetas, Integer duracion, Dureza dureza, List<Material> materialesString, List<Multimedia> multimedia) {
         this.idMongo = idMongo;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.etiquetas = etiquetas;
         this.duracion = duracion;
         this.dureza = dureza;
-        this.materiales = materiales;
+        this.materialesString = materialesString;
         this.multimedia = multimedia;
     }
 
@@ -56,11 +58,11 @@ public class Ejercicio {
         this.etiquetas = etiquetas;
     }
 
-    public int getDuracion() {
+    public Integer getDuracion() {
         return duracion;
     }
 
-    public void setDuracion(int duracion) {
+    public void setDuracion(Integer duracion) {
         this.duracion = duracion;
     }
 
@@ -72,12 +74,12 @@ public class Ejercicio {
         this.dureza = dureza;
     }
 
-    public List<Materiales> getMateriales() {
-        return materiales;
+    public List<Material> getMateriales() {
+        return materialesString;
     }
 
-    public void setMateriales(List<Materiales> materiales) {
-        this.materiales = materiales;
+    public void setMateriales(List<Material> materiales) {
+        this.materialesString = materiales;
     }
 
     public List<Multimedia> getMultimedia() {

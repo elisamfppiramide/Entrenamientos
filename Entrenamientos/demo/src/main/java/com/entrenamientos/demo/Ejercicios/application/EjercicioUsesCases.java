@@ -2,6 +2,7 @@ package com.entrenamientos.demo.Ejercicios.application;
 
 import com.entrenamientos.demo.Ejercicios.domain.Ejercicio;
 import com.entrenamientos.demo.Ejercicios.domain.EjercicioRepository;
+import com.entrenamientos.demo.Ejercicios.domain.Material;
 import com.entrenamientos.demo.entrenamientos.domain.Entrenamiento;
 import com.entrenamientos.demo.entrenamientos.domain.EntrenamientoRepository;
 import com.entrenamientos.demo.jugadores.application.JugadorUsesCases;
@@ -27,6 +28,10 @@ public class EjercicioUsesCases {
 
     public Ejercicio addEjercicio(Ejercicio ejercicio){
         return ejercicioRepository.addEjercicio(ejercicio);
+    }
+
+    public Ejercicio add(Ejercicio ejercicio, Material material){
+        return this.ejercicioRepository.add(ejercicio, material);
     }
 
 

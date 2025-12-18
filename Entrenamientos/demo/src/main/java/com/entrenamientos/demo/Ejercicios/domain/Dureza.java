@@ -6,7 +6,7 @@ public class Dureza {
     private int velocidad;
     private int recuperacion;
 
-    public Dureza(int resistencia, int velocidad, int recuperacion) {
+    public Dureza(Integer resistencia, Integer velocidad, Integer recuperacion) {
         this.resistencia = resistencia;
         this.velocidad = velocidad;
         this.recuperacion = recuperacion;
